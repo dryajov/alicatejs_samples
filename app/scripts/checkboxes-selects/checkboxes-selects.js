@@ -70,11 +70,11 @@ define(
 
         return View.extend({
             templateName: 'app/scripts/checkboxes-selects/checkboxes-selects.html',
-            children: {
-                select: dropdown,
-                selection: selection,
-                radio: radio
-            }
+            children: [
+                dropdown,
+                selection,
+                radio
+            ]
         })
     })
 ;

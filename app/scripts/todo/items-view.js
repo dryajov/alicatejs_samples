@@ -21,6 +21,7 @@ define(
         var loaded = false,
             todoItems = [],
             todoItemsList = {},
+            addListView = false,
 
         // Models
             todoItemTextModel = new Model(),
@@ -38,26 +39,29 @@ define(
 
             addList = new Component({
                 id: 'add-list'
-            }).on('click', function (event) {
-                    addListContainer.setVisible(true);
+            }).on('click', function () {
+                    addListContainer.setVisible(addListView = true);
                 }),
 
             removeList = new Component({
                 id: 'remove-list'
-            }).on('click', function (event) {
-
+            }).on('click', function () {
+                    if (todoItemsList[todoItemList.selected]) {
+                        (new Firebase('https://alicate-todo.firebaseio.com/list/' +
+                            todoItemsList[todoItemList.selected].child)).remove()
+                    }
                 }),
 
             addListContainer = new Container({
                 id: 'add-list-container',
-                children: {
-                    'new-list-name': new Input({
+                children: [
+                    new Input({
                         id: 'new-list-name',
                         model: newTodoListModel
-                    }).on('blur', function (event) {
-                            var todoBackendListItem = new Firebase('https://alicate-todo.firebaseio.com/list/');
-
-                            addListContainer.setVisible(false);
+                    }).on('blur', function () {
+                            var todoBackendListItem =
+                                new Firebase('https://alicate-todo.firebaseio.com/list/');
+                            addListContainer.setVisible(addListView = false);
                             if (newTodoListModel.get() &&
                                 newTodoListModel.get().length > 0) {
                                 todoBackendListItem.push({
@@ -67,8 +71,10 @@ define(
                                 newTodoListModel.set();
                             }
                         })
-                },
-                visible: false
+                ],
+                isVisible: function () {
+                    return addListView;
+                }
             }),
 
         // `todo` items list
@@ -82,11 +88,10 @@ define(
                         attributes: {
                             alt: 'X'
                         }
-                    }).on('click', function (event) {
+                    }).on('click', function () {
                             var todoBackendListItem =
                                 new Firebase('https://alicate-todo.firebaseio.com/list/' +
                                     todoItemsList[todoItemList.selected].child + '/items/');
-
                             todoBackendListItem.child(item.getModelData().child).remove();
                         }));
 
@@ -133,25 +138,25 @@ define(
         // the main view
             todoView = new Container({
                 id: 'todo-view',
-                children: {
-                    'todo-list-select': todoItemList,
-                    'add-list': addList,
-                    'remove-list': removeList,
-                    'add-list-container': addListContainer,
-                    'todo-items': new Container({
+                children: [
+                    todoItemList,
+                    addList,
+                    removeList,
+                    addListContainer,
+                    new Container({
                         id: 'todo-items',
-                        children: {
-                            item: todoItemsRepeater
-                        }
+                        children: [
+                            todoItemsRepeater
+                        ]
                     }),
-                    'todo-text': new Input({
+                    new Input({
                         id: 'todo-text',
                         model: todoItemTextModel
                     }),
-                    'add-button': addButton,
-                    'todo-no-items': todoNoItems,
-                    'item-exists': itemExists
-                },
+                    addButton,
+                    todoNoItems,
+                    itemExists
+                ],
                 visible: false
             }),
 
@@ -171,6 +176,7 @@ define(
                 itemExists.setVisible(true);
             } else if (item.text.length > 0) {
                 todoItems.push(item);
+//                todoItemsRepeater.addItem(item.text);
             }
         }
 
@@ -242,10 +248,10 @@ define(
 
         return View.extend({
             templateName: 'app/scripts/todo/items-view.html',
-            children: {
-                'loading-view': loadingView,
-                'todo-view': todoView
-            },
+            children: [
+                loadingView,
+                todoView
+            ],
             onPostRender: function () {
                 loadTodoListData();
             }

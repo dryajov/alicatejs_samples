@@ -13,9 +13,9 @@ define(
         'use strict';
 
         var app = new AlicateApp({
-                templateStore: templates,
-                $selector: '#attach'
-            });
+            templateStore: templates,
+            $selector: '#attach'
+        });
 
         return app.mount('/link1', new ItemsView())
             .mount('/link2', new TabbedView())

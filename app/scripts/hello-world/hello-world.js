@@ -6,17 +6,17 @@ define(
         'alicate/components/view',
         'alicate/components/label'
     ],
-    function(View, Label) {
+    function (View, Label) {
         'use strict';
 
         return View.extends({
             templateName: 'helloworld.html',
-            children: {
-                hello: new Label({
+            children: [
+                new Label({
                     id: 'hello',
                     text: 'Hello World from Alicate!!'
                 })
-            }
+            ]
         });
     }
 )

@@ -80,9 +80,9 @@ define(
 
         return View.extend({
             templateName: 'app/scripts/tabbed-view/tabbed-view.html',
-            children: {
-                'tab-links': tabs,
-                'tab-view': tabsView
-            }
+            children: [
+                tabs,
+                tabsView
+            ]
         });
     });

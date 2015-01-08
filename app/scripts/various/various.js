@@ -3,19 +3,26 @@ define(
     [
         'alicate/alicateapp',
         'alicate/components/container',
+        'alicate/components/component',
         'alicate/components/view',
         'alicate/components/label',
         'alicate/components/repeater',
         'alicate/components/input',
-        'alicate/model'
+        'alicate/model',
+        'alicate/markupiter',
+        'jquery'
     ],
-    function (AlicateApp, Container, View, Label, Repeater, Input, Model) {
+    function (AlicateApp, Container, Component, View, Label, Repeater, Input, Model, MarkupIter, $) {
         'use strict';
+
+        var myAppender = new Container({
+            id: 'my-appender'
+        });
 
         return View.extend({
             templateName: 'app/scripts/various/various.html',
-            children: {
-                'my-container': new Container({
+            children: [
+                new Container({
                     id: 'my-container',
                     visible: true
                 }).add(new Repeater({
@@ -36,10 +43,17 @@ define(
                                 }
                             }))
                         }
-                    })).add(new Label({
-                        id: 'some-label',
-                        text: 'Fuck yeah!'
-                    }))
-            }
+                    })),
+                myAppender,
+                new Component({
+                    id: 'add'
+                }).on('click', function () {
+                        myAppender.append(new Label({
+                            id: 'new',
+                            text: 'some text',
+                            $el: $('<div/>')
+                        }));
+                    })
+            ]
         });
     });
