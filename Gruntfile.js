@@ -392,7 +392,7 @@ module.exports = function (grunt) {
             // uglify: true
         },
 
-        template_store: {
+        'template-store': {
             templates: {
                 options: {
                     htmlmin: {
@@ -476,7 +476,7 @@ module.exports = function (grunt) {
         'autoprefixer',
         'requirejs',
         'concat',
-        'template_store',
+        'template-store',
         'cssmin',
         // 'uglify',
         'copy:dist',
