@@ -19,23 +19,35 @@ define(
 
         var
         // this will represent the currently selected item
-            selectedModel = new Model({
+            selectedDropDownModel = new Model({
                 data: {val: "two"}
             }),
         // The dropdown
             dropdown = new Select({
                 id: 'select',
                 model: ["one", "two", "three"],
-                selected: selectedModel.get().val
+                selected: selectedDropDownModel.get().val
             }).on('change', function (event) {
-                    selectedModel.set({val: event.target.value});
+                    selectedDropDownModel.set({val: event.target.value});
                 }),
         // Label indicating the current selected item
             selection = new Label({
                 id: 'selection',
                 text: 'The selected value is {val}',
-                model: selectedModel
+                model: selectedDropDownModel
             }),
+
+            defaultRadioSelection = 'one',
+            selectedRadioModel = new Model({
+                data: {val: defaultRadioSelection}
+            }),
+
+            radioSelection = new Label({
+                id: 'radio-selection',
+                text: 'Selected radio is {val}',
+                model: selectedRadioModel
+            }),
+
         // Create the radioboxes/checkboxes
             radio = new Repeater({
                 id: 'radio',
@@ -53,12 +65,13 @@ define(
                         }
                     });
 
-                    if (item.getModelData() === 'one') {
-                        input.setAttr('checked', "");
+                    if (item.getModelData() === defaultRadioSelection) {
+                        input.setAttr('checked', "true");
                     }
 
                     input.on('change', function (evt) {
                         console.log("Currently checked: " + evt.target.defaultValue);
+                        selectedRadioModel.set({val: evt.target.defaultValue})
                     });
 
                     item.add(new Label({
@@ -73,7 +86,8 @@ define(
             children: [
                 dropdown,
                 selection,
-                radio
+                radio,
+                radioSelection
             ]
         })
     })
