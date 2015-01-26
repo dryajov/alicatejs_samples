@@ -28,7 +28,7 @@ define(
                     id: 'todo-list-select',
                     model: todoListsModel,
                     // TODO: onOptionRender is not really the place to do this, by the time it runs
-                    // the option component is already created, so setting a model, will cause it to re-render.
+                    // the option component is already created, so setting the model, will cause it to re-render.
                     // A method should be defined in the select component that will be used to get the text of the
                     // select option
                     onOptionRender: function (option) {
@@ -50,10 +50,8 @@ define(
                 removeList = new Component({
                     id: 'remove-list'
                 }).on('click', function () {
-                        //if (todoItemsList[todoItemList.selected]) {
-                        //    (new Firebase('https://alicate-todo.firebaseio.com/list/' +
-                        //    todoItemsList[todoItemList.selected].child)).remove()
-                        //}
+                        selectedListModel.set(null);
+                        ApiHelpers.removeTodoList(todoItemList.getSelected());
                     }),
 
                 addListContainerVisibility = false,

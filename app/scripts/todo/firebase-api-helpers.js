@@ -9,10 +9,10 @@ define(
         return {
             // Load data from backend
             loadTodoLists: function loadTodoLists(callback, context) {
-                var todoBackendList = new Firebase(FIREBASE_ENDPOINT_URL),
-                    todoLists = [];
+                var todoBackendList = new Firebase(FIREBASE_ENDPOINT_URL);
 
                 todoBackendList.on('value', function (snapshot) {
+                    var todoLists = [];
                     snapshot.forEach(function (childSnapshot) {
                         todoLists.push({
                             item: childSnapshot.val(),
@@ -52,8 +52,7 @@ define(
                 });
             },
             addNewTodoList: function addNewTodoList(name, callback, context) {
-                var todoBackendListItem =
-                    new Firebase(FIREBASE_ENDPOINT_URL);
+                var todoBackendListItem = new Firebase(FIREBASE_ENDPOINT_URL);
                 if (name && name.length > 0) {
                     todoBackendListItem.push({
                         name: name,
@@ -81,10 +80,17 @@ define(
                 }
             },
             removeTodoItem: function removeTodoItem(list, item, callback, context) {
-                var todoBackendListItem =
-                    new Firebase(FIREBASE_ENDPOINT_URL +
-                    list + '/items/');
+                var todoBackendListItem = new Firebase(FIREBASE_ENDPOINT_URL +
+                list + '/items/');
                 todoBackendListItem.child(item).remove(function (error) {
+                    if (callback) {
+                        callback.call(context);
+                    }
+                });
+            },
+            removeTodoList: function removeTodoList(list, callback, context) {
+                (new Firebase('https://alicate-todo.firebaseio.com/list/' +
+                list).remove(), function () {
                     if (callback) {
                         callback.call(context);
                     }

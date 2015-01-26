@@ -42,7 +42,7 @@ define(
                 id: 'add-todo-item-view'
             }),
 
-        // the main view container
+        // the main container
             todoView = new Container({
                 id: 'todo-view',
                 children: [
@@ -53,7 +53,7 @@ define(
                 visible: false
             }),
 
-        // the loading view
+        // the loading gif
             loadingView = new Container({
                 id: 'loading-view',
                 visible: true
