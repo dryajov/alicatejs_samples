@@ -4,7 +4,8 @@ require.config({
         alicate: '../bower_components/alicatejs/app/scripts/alicate',
         pagejs: '../bower_components/page.js/index',
         underscore: '../bower_components/underscore/underscore',
-        firebasejs: '../bower_components/firebase/firebase-debug'
+        firebasejs: '../bower_components/firebase/firebase-debug',
+        vdom: '../npm_amd_bundles/vdom-virtualize-0.0.6-{'
     },
     shim: {
         pagejs: {

@@ -27,7 +27,7 @@ define(
         var that = this,
         // Model
             todoListsModel = new Model({data: []}),
-        // a model holding the currently selected todo list object
+        // a model holding the currently selected tod1o list object
             selectedTodoListItem = new Model(),
 
             todoItemsListView = new (TodoItemsListView(selectedTodoListItem))({
