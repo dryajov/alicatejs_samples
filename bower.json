@@ -1,14 +1,8 @@
 {
-  "name": "eggplant-test",
-  "private": true,
+  "name": "alicatejs-samples",
+  "version": "0.0.0",
   "dependencies": {
-    "bootstrap-sass": "git://github.com/twbs/bootstrap-sass.git#v3.1.0",
-    "modernizr": "~2.6.2",
-    "requirejs": "~2.1.8",
-    "jquery": "~1.10.2",
-    "alicatejs": "/Users/dmitriy.ryajov/personal/projects/alicatejs",
-    "underscore": "~1.6.0",
-    "firebase": "~1.0.19"
-  },
-  "devDependencies": {}
+    "bootstrap": ">=3.1.1",
+    "modernizr": "~2.8.2"
+  }
 }

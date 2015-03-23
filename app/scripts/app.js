@@ -1,24 +1,22 @@
 /* global define */
-define(
-    [
-        'jquery',
-        'alicate/alicateapp',
-        'todo/items-view',
-        'tabbed-view/tabbed-view',
-        'checkboxes-selects/checkboxes-selects',
-        'various/various',
-        'templates'
-    ],
-    function ($, AlicateApp, ItemsView, TabbedView, CheckboxesSelects, Various, templates) {
-        'use strict';
 
-        var app = new AlicateApp({
-            templateStore: templates,
-            $selector: '#attach'
-        });
+var AlicateApp = require('alicate/alicateapp'),
+  ItemsView = require('todo/items-view'),
+  TabbedView = require('tabbed-view/tabbed-view'),
+  CheckboxesSelects = require('checkboxes-selects/checkboxes-selects'),
+  Various = require('various/various'),
+  templates = require('./templates');
 
-        return app.mount('/link1', new ItemsView())
-            .mount('/link2', new TabbedView())
-            .mount('/link3', new CheckboxesSelects())
-            .mount('/link4', new Various());
-    });
+exports.app = function () {
+  'use strict';
+
+  var app = new AlicateApp({
+    templateStore: templates,
+    $selector: '#attach'
+  });
+
+  return app.mount('/link1', new ItemsView())
+    .mount('/link2', new TabbedView())
+    .mount('/link3', new CheckboxesSelects())
+    .mount('/link4', new Various());
+};
