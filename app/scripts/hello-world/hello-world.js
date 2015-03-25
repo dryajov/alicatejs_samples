@@ -10,14 +10,6 @@ var $ = require('jquery'),
     Button = Alicate.Button,
     Select = Alicate.Select;
 
-var $ = require('jquery'),
-    Alicate = require('alicatejs'),
-    View = Alicate.View,
-    Container = Alicate.Container,
-    Label = Alicate.Label,
-    Button = Alicate.Button,
-    Select = Alicate.Select;
-
 module.exports = View.extends({
     templateName: 'helloworld.html',
     children: [

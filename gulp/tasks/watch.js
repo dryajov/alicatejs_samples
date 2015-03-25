@@ -6,7 +6,7 @@ var livereload = require('gulp-livereload');
 
 // Watch
 gulp.task('watch', ['connect', 'serve'], function () {
-  var server = livereload();
+    var server = livereload();
     // Watch for changes in `app` folder
     gulp.watch([
         // 'app/jade/**/*.jade',
@@ -15,8 +15,8 @@ gulp.task('watch', ['connect', 'serve'], function () {
         // 'app/scripts/**/*.js',
         // 'app/images/**/*',
         '.tmp/**/*'
-    ]).on('change', function(file) {
-      server.changed(file.path);
+    ]).on('change', function (file) {
+        server.changed(file.path);
     });
 
     // Watch .less files

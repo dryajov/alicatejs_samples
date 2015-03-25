@@ -11,5 +11,5 @@ var app = require('./app');
 
 // use app here
 var path = window.location.pathname.length > 1
-  ? window.location.pathname : '/link1';
+    ? window.location.pathname : '/link1';
 app.start(path);
