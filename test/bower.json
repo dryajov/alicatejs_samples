@@ -1,5 +1,5 @@
 {
-  "name": "eggplant-test",
+  "name": "alicatejs-samples",
   "private": true,
   "dependencies": {
     "chai": "~1.8.0",

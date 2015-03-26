@@ -1,84 +1,73 @@
 /**
  * Created by dmitriy.ryajov on 7/14/14.
  */
-define(
-    [
-        'jquery',
-        'alicate/components/view',
-        'alicate/components/container',
-        'alicate/components/repeater',
-        'alicate/components/label',
-        'alicate/components/button',
-        'alicate/components/input',
-        'alicate/components/image',
-        'alicate/components/select',
-        'alicate/components/component',
-        'alicate/model',
-        'todo/firebase-api-helpers',
-        'todo/todo-items-list-view',
-        'todo/select-todo-list-view',
-        'todo/add-todo-item-view'
-    ],
-    function ($, View, Container, Repeater, Label, Button, Input,
-              Image, Select, Component, Model, ApiHelpers,
-              TodoItemsListView, SelectTodoListView, AddTodoItemView) {
-        'use strict';
+'use strict';
 
-        var that = this,
-        // Model
-            todoListsModel = new Model({data: []}),
-        // a model holding the currently selected todo list object
-            selectedTodoListItem = new Model(),
+var $ = require('jquery'),
+    Alicate = require('alicatejs'),
+    View = Alicate.View,
+    Container = Alicate.Container,
+    Button = Alicate.Button,
+    Select = Alicate.Select,
+    Model = Alicate.Model,
+    TodoItemsListView = require('./todo-items-list-view'),
+    SelectTodoListView = require('./select-todo-list-view'),
+    AddTodoItemView = require('./add-todo-item-view'),
+    ApiHelpers = require('./firebase-api-helpers');
 
-            todoItemsListView = new (TodoItemsListView(selectedTodoListItem))({
-                id: 'todo-items-view'
-            }),
+var
+// Model
+    todoListsModel = new Model({data: []}),
+// a model holding the currently selected tod1o list object
+    selectedTodoListItem = new Model(),
 
-            selectTodoListView = new (SelectTodoListView(todoListsModel, selectedTodoListItem))({
-                id: 'select-todo-list-view'
-            }),
+    todoItemsListView = new (TodoItemsListView(selectedTodoListItem))({
+        id: 'todo-items-view'
+    }),
 
-            addTodoItemView = new (AddTodoItemView(selectedTodoListItem))({
-                id: 'add-todo-item-view'
-            }),
+    selectTodoListView = new (SelectTodoListView(todoListsModel, selectedTodoListItem))({
+        id: 'select-todo-list-view'
+    }),
 
-        // the main container
-            todoView = new Container({
-                id: 'todo-view',
-                children: [
-                    selectTodoListView,
-                    addTodoItemView,
-                    todoItemsListView
-                ],
-                visible: false
-            }),
+    addTodoItemView = new (AddTodoItemView(selectedTodoListItem))({
+        id: 'add-todo-item-view'
+    }),
 
-        // the loading gif
-            loadingView = new Container({
-                id: 'loading-view',
-                visible: true
-            });
+// the main container
+    todoView = new Container({
+        id: 'todo-view',
+        children: [
+            selectTodoListView,
+            addTodoItemView,
+            todoItemsListView
+        ],
+        visible: false
+    }),
 
-        function todoListsLoaded(todoLists) {
-            todoView.setVisible(true);
-            loadingView.setVisible(false);
+// the loading gif
+    loadingView = new Container({
+        id: 'loading-view',
+        visible: true
+    });
 
-            // set default selected
-            if (!selectedTodoListItem.get()) {
-                selectedTodoListItem.set(todoLists[0].id);
-            }
-            todoListsModel.set(todoLists);
-        }
+function todoListsLoaded(todoLists) {
+    todoView.setVisible(true);
+    loadingView.setVisible(false);
 
-        return View.extend({
-            templateName: 'app/scripts/todo/items-view.html',
-            children: [
-                loadingView,
-                todoView
-            ],
-            onPostRender: function () {
-                ApiHelpers.loadTodoLists(todoListsLoaded);
-            }
-        });
+    // set default selected
+    if (!selectedTodoListItem.get()) {
+        selectedTodoListItem.set(todoLists[0].id);
     }
-);
+    todoListsModel.set(todoLists);
+}
+
+module.exports = View.extend({
+    templateName: 'app/scripts/todo/items-view.html',
+    children: [
+        loadingView,
+        todoView
+    ],
+    onPostRender: function () {
+        ApiHelpers.loadTodoLists(todoListsLoaded);
+    }
+});
