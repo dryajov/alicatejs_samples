@@ -8,10 +8,11 @@ var $ = require('jquery'),
     Container = Alicate.Container,
     Label = Alicate.Label,
     Button = Alicate.Button,
-    Select = Alicate.Select;
+    Select = Alicate.Select,
+    View = Alicate.View;
 
-module.exports = View.extends({
-    templateName: 'helloworld.html',
+module.exports = View.extend({
+    templateName: 'app/scripts/hello-world/hello-world.html',
     children: [
         new Label({
             id: 'hello',
