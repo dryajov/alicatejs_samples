@@ -26,9 +26,11 @@ gulp.task('vendor', function () {
 gulp.task('browserify', function () {
     return browserify({debug: true})
         .add('./app/scripts/main.js')
-        //.external('jquery')
-        //.external('lodash')
-        //.external('backbone')
+        .external('jquery')
+        .external('lodash')
+        .external('backbone')
+        .external('page')
+        .external('firebase')
         .transform(partialify) // Transform to allow requireing of templates
         .bundle()
         .pipe(source('main.js'))

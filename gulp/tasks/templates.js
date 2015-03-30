@@ -25,6 +25,6 @@ gulp.task('templates', function () {
                 file.contents
             ]);
         }))
-        .pipe(gulp.dest(config.dist))
+        .pipe(gulp.dest('./app/scripts/'))
         .pipe(size());
 });

@@ -10,7 +10,6 @@ var templates = require('./templates'),
     VariousView = require('./various/various'),
     HelloWorldView = require('./hello-world/hello-world');
 
-
 var app = new AlicateApp({
         templateStore: templates,
         $selector: '#attach'
