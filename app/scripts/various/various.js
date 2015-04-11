@@ -2,19 +2,19 @@
 
 'use strict';
 
-var $ = require('jquery'),
-    Alicate = require('alicatejs'),
-    View = Alicate.View,
-    Container = Alicate.Container,
-    Repeater = Alicate.Repeater,
-    Label = Alicate.Label,
-    Button = Alicate.Button,
-    Select = Alicate.Select,
-    Model = Alicate.Model,
-    Component = Alicate.Component;
+var Alicatejs = require('alicatejs'),
+    View = Alicatejs.View,
+    Container = Alicatejs.Container,
+    Repeater = Alicatejs.Repeater,
+    Label = Alicatejs.Label,
+    Button = Alicatejs.Button,
+    Select = Alicatejs.Select,
+    Model = Alicatejs.Model,
+    Component = Alicatejs.Component;
 
 var myAppender = new Container({
-    id: 'my-appender'
+    id: 'my-appender',
+    isBound: true
 });
 
 module.exports = View.extend({
@@ -49,7 +49,8 @@ module.exports = View.extend({
                 myAppender.append(new Label({
                     id: 'new',
                     text: 'some text',
-                    $el: $('<div/>')
+                    $el: $('<div/>'),
+                    isBound: true
                 }));
             })
     ]
