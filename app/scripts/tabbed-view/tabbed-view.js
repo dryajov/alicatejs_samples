@@ -3,8 +3,7 @@
  */
 'use strict';
 
-var $ = require('jquery'),
-    Alicate = require('alicatejs'),
+var Alicate = require('alicatejs'),
     View = Alicate.View,
     Container = Alicate.Container,
     Repeater = Alicate.Repeater,
