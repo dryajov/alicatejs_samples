@@ -7,7 +7,8 @@ var AlicateApp = require('alicatejs').AlicateApp,
     TabbedView = require('./tabbed-view/tabbed-view'),
     CheckboxesSelectsView = require('./checkboxes-selects/checkboxes-selects'),
     VariousView = require('./various/various'),
-    HelloWorldView = require('./hello-world/hello-world');
+    HelloWorldView = require('./hello-world/hello-world'),
+    TextIO = require('./text-io/text-io');
 
 var app = new AlicateApp({
     templateStore: templates,
@@ -21,4 +22,5 @@ module.exports = app
     .mount('/link2', tabbedView)
     .mount('/link3', new CheckboxesSelectsView())
     .mount('/link4', new VariousView())
-    .mount('/link5', new HelloWorldView());
+    .mount('/link5', new HelloWorldView())
+    .mount('/link6', new TextIO());

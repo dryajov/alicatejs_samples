@@ -12,11 +12,8 @@ var source = require('vinyl-source-stream');
 // Vendor
 gulp.task('vendor', function () {
     return browserify({debug: true})
-        .require('jquery')
-        .require('lodash', {expose: 'underscore'})
         .require('backbone')
         .require('page')
-        .require('firebase')
         .bundle()
         .pipe(source('vendor.js'))
         .pipe(gulp.dest(config.dist + '/scripts/'));
@@ -26,11 +23,8 @@ gulp.task('vendor', function () {
 gulp.task('browserify', function () {
     return browserify({debug: true})
         .add('./app/scripts/main.js')
-        .external('jquery')
-        .external('lodash')
         .external('backbone')
         .external('page')
-        .external('firebase')
         .transform(partialify) // Transform to allow requireing of templates
         .bundle()
         .pipe(source('main.js'))

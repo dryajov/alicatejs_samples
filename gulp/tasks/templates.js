@@ -18,7 +18,7 @@ gulp.task('templates', function () {
         }))
         .pipe(uglify())
         .pipe(concat('templates.js'))
-        .pipe(debug())
+        //.pipe(debug())
         .pipe(tap(function (file) {
             file.contents = Buffer.concat([
                 new Buffer('var $templateStore = {};\nmodule.exports = $templateStore;\n'),

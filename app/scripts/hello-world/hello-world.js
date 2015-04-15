@@ -3,19 +3,21 @@
  */
 'use strict';
 
-var Alicate = require('alicatejs'),
-    Container = Alicate.Container,
-    Label = Alicate.Label,
-    Button = Alicate.Button,
-    Select = Alicate.Select,
-    View = Alicate.View;
+(function () {
+    'use strict';
 
-module.exports = View.extend({
-    templateName: 'app/scripts/hello-world/hello-world.html',
-    children: [
-        new Label({
-            id: 'hello',
-            text: 'Hello World from Alicate!!'
-        })
-    ]
-});
+    var Alicate = require('alicatejs'),
+        Label = Alicate.Label,
+        View = Alicate.View;
+
+    module.exports = View.extend({
+        templateName: 'app/scripts/hello-world/hello-world.html',
+        children: [
+            new Label({
+                id: 'hello',
+                text: 'Hello World from Alicate!!'
+            })
+        ]
+    });
+
+})();
