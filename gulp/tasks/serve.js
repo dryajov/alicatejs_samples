@@ -2,6 +2,7 @@
 
 var config = require('../config');
 var gulp = require('gulp');
+var router = require('static-router');
 
 // Connect
 gulp.task('connect', function () {
@@ -10,6 +11,7 @@ gulp.task('connect', function () {
         .use(require('connect-livereload')({port: config.livereloadPort}))
         .use('/', connect.static('.tmp'))
         .use('/', connect.static('app'))
+        .use(router([{'**': 'app/index.html'}]))
         // paths to bower_components should be relative to the current file
         // e.g. in app/index.html you should use ../bower_components
         .use('/bower_components', connect.static('bower_components'))

@@ -67,12 +67,19 @@
                     text: 'This is tab ' + item.getModelData().text
                 }));
 
-                item.visible = visible;
                 if (!activeTabView) {
                     activeTabView = item;
                 }
-                visible = false;
+
+                //item.visible = false;
                 tabViews.push(item);
+            },
+            onPostRender: function () {
+                tabViews.forEach(function (view) {
+                    if (view !== activeTabView) {
+                        view.setVisible(false);
+                    }
+                });
             },
             model: tabsModel
         });
@@ -83,7 +90,7 @@
             tabs,
             tabsView
         ],
-        onPreRender: function () {
+        initialize: function () {
             active = true;
             visible = true;
             activeTabButton = null;
